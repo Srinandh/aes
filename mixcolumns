@@ -1,0 +1,42 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity mixcolumns is
+Port ( a : in  STD_LOGIC_VECTOR (127 downto 0);
+       mixout : out  STD_LOGIC_VECTOR (127 downto 0));
+end mixcolumns;
+
+	architecture Behavioral of mixcolumns is
+signal p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15:std_logic_vector(7 downto 0);
+
+component mixcolumn32 is
+    Port ( i1,i2,i3,i4: in STD_LOGIC_VECTOR (7 downto 0);
+           data_out : out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+ 
+begin
+
+z1:mixcolumn32 port map(i1=>a(127 downto 120),i2=>a(119 downto 112),i3=>a(111 downto 104),i4=>a(103 downto 96),data_out=>p0);
+z2:mixcolumn32 port map(i1=>a(119 downto 112),i2=>a(111 downto 104),i3=>a(103 downto 96),i4=>a(127 downto 120),data_out=>p1);
+z3:mixcolumn32 port map(i1=>a(111 downto 104),i2=>a(103 downto 96),i3=>a(127 downto 120),i4=>a(119 downto 112),data_out=>p2);
+z4:mixcolumn32 port map(i1=>a(103 downto 96),i2=>a(127 downto 120),i3=>a(119 downto 112),i4=>a(111 downto 104),data_out=>p3);
+
+z5:mixcolumn32 port map(i1=>a(95 downto 88),i2=>a(87 downto 80),i3=>a(79 downto 72),i4=>a(71 downto 64),data_out=>p4);
+z6:mixcolumn32 port map(i1=>a(87 downto 80),i2=>a(79 downto 72),i3=>a(71 downto 64),i4=>a(95 downto 88),data_out=>p5);
+z7:mixcolumn32 port map(i1=>a(79 downto 72),i2=>a(71 downto 64),i3=>a(95 downto 88),i4=>a(87 downto 80),data_out=>p6);
+z8:mixcolumn32 port map(i1=>a(71 downto 64),i2=>a(95 downto 88),i3=>a(87 downto 80),i4=>a(79 downto 72),data_out=>p7);
+
+z9:mixcolumn32 port map(i1=>a(63 downto 56),i2=>a(55 downto 48),i3=>a(47 downto 40),i4=>a(39 downto 32),data_out=>p8);
+z10:mixcolumn32 port map(i1=>a(55 downto 48),i2=>a(47 downto 40),i3=>a(39 downto 32),i4=>a(63 downto 56),data_out=>p9);
+z11:mixcolumn32 port map(i1=>a(47 downto 40),i2=>a(39 downto 32),i3=>a(63 downto 56),i4=>a(55 downto 48),data_out=>p10);
+z12:mixcolumn32 port map(i1=>a(39 downto 32),i2=>a(63 downto 56),i3=>a(55 downto 48),i4=>a(47 downto 40),data_out=>p11);
+
+z13:mixcolumn32 port map(i1=>a(31 downto 24),i2=>a(23 downto 16),i3=>a(15 downto 8),i4=>a(7 downto 0),data_out=>p12);
+z14:mixcolumn32 port map(i1=>a(23 downto 16),i2=>a(15 downto 8),i3=>a(7 downto 0),i4=>a(31 downto 24),data_out=>p13);
+z15:mixcolumn32 port map(i1=>a(15 downto 8),i2=>a(7 downto 0),i3=>a(31 downto 24),i4=>a(23 downto 16),data_out=>p14);
+z16:mixcolumn32 port map(i1=>a(7 downto 0),i2=>a(31 downto 24),i3=>a(23 downto 16),i4=>a(15 downto 8),data_out=>p15);
+
+mixout <=p0&p1&p2&p3&p4&p5&p6&p7&p8&p9&p10&p11&p12&p13&p14&p15;
+
+
+end Behavioral;
