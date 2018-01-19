@@ -1,0 +1,48 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+  
+ENTITY aes_tb IS
+END aes_tb;
+ 
+ARCHITECTURE behavior OF aes_tb IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT aes is
+    PORT(
+         clk : IN  std_logic;
+         textin : IN  std_logic_vector(127 downto 0);
+         key : IN  std_logic_vector(127 downto 0);
+         finalout : OUT  std_logic_vector(127 downto 0)
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal clk : std_logic := '0';
+   signal textin : std_logic_vector(127 downto 0) := (others => '0');
+   signal key : std_logic_vector(127 downto 0) := (others => '0');
+
+ 	--Outputs
+   signal finalout : std_logic_vector(127 downto 0);
+
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: aes PORT MAP (
+          clk => clk,
+        textin => textin,
+          key => key,
+          finalout => finalout
+        );
+process
+begin
+ 
+clk <= '1';
+ 
+textin <= x"00112233445566778899aabbccddeeff";
+key <= x"000102030405060708090a0b0c0d0e0f";
+wait for 100 ns; 
+   end process;
+end behavior;
