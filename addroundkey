@@ -9,6 +9,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- any Xilinx primitives in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
+--use all
 
 entity addroundkey is
 port(
@@ -21,5 +22,6 @@ architecture Behavioral of addroundkey is
 
 begin
 add_out <= k_in xor m_in;
+
 
 end Behavioral;
